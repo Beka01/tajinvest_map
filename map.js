@@ -32,7 +32,9 @@ $(document).ready(function () {
          snapshot.forEach(function (childSnapshot) {
             title = childSnapshot.title;
          });
-      }
-   });
+      });
+   }
+
+   getdata();
 
 });
