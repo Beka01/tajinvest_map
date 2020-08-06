@@ -29,7 +29,7 @@ $(document).ready(function () {
       rootRef.once("value").then(function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             el = `
-            <div class="card">
+            <div class="card" data-category="${childSnapshot.val().category}">
                <div class="card-body">
                   <h5 class="card-title">${childSnapshot.val().title}</h5>
                   <p class="card-text">${childSnapshot.val().description}</p>
