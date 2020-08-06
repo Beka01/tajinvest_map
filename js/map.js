@@ -27,7 +27,15 @@ $(document).ready(function () {
    function getData() {
       rootRef.once("value").then(function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
-            title = childSnapshot.title;
+            el = `
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title">${childSnapshot.val().title}</h5>
+                  <p class="card-text">${childSnapshot.val().description}</p>
+                  <a href="#" class="btn btn-primary">Button</a>
+               </div>
+            </div>`
+            $('.data').append(el)
          });
       });
    }
