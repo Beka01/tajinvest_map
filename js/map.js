@@ -19,6 +19,7 @@ $(document).ready(function () {
 
    const title = document.getElementsByClassName('card-title');
    const description = document.getElementsByClassName('card-text');
+   const category = document.getElementsByClassName('card-text');
 
 
    const database = firebase.database();
@@ -32,7 +33,7 @@ $(document).ready(function () {
                <div class="card-body">
                   <h5 class="card-title">${childSnapshot.val().title}</h5>
                   <p class="card-text">${childSnapshot.val().description}</p>
-                  <a href="#" class="btn btn-primary">Button</a>
+                  <span class = "badge badge-primary">${childSnapshot.val().category}</span> 
                </div>
             </div>`
             $('.data').append(el)
