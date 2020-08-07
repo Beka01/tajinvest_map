@@ -40,8 +40,21 @@ $(document).ready(function () {
          });
       });
    }
+   function getCategoryData() {
+      rootRef.once("value").then(function (snapshot) {
+         snapshot.forEach(function (childSnapshot) {
+            el = `
+            <option value="1">${childSnapshot.val().category}</option>
+            </select>`
+            $('.category-filter').append(el)
+         });
+      });
+   }
 
    getData();
+   getCategoryData();
+
+   //MAP 
 
    const data = [
       {
