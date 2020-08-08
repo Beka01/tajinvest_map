@@ -20,7 +20,8 @@ $(document).ready(function () {
    const title = document.getElementsByClassName('card-title');
    const description = document.getElementsByClassName('card-text');
    const category = document.getElementsByClassName('card-text');
-   let ruLngCat;
+   let lngCat;
+   let lngProjectPrice;
 
    const database = firebase.database();
    const rootRef = database.ref('map/projects/sectors');
@@ -30,23 +31,33 @@ $(document).ready(function () {
       rootRef.once("value").then(function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             el = `
-            <div class="card" data-category="${childSnapshot.val().category}">
+            <div class="card" data-category="${childSnapshot.val()[lngCat]}">
                <div class="card-body">
                   <h5 class="card-title">${childSnapshot.val().title}</h5>
                   <p class="card-text">${childSnapshot.val().description}</p>
-                  <span class = "badge badge-primary">${childSnapshot.val()[ruLngCat]}</span> 
+                  <span class = "badge badge-primary">${childSnapshot.val()[lngCat]}</span> 
+                  <span class = "badge badge-primary">${childSnapshot.key().cost}</span> 
                </div>
             </div>`
             $('.data').append(el)
          });
       });
+      
    }
 
    getCategories();
     function getCategories (){
-      ruLngCat = $("#select option:selected").val()
-      console.log(ruLngCat)
+      lngCat = $("#select option:selected").val()
+      console.log(lngCat)
    }
+   // getProjectCost();
+   //  function getProjectCost (){
+   //    lngProjectPrice = $("#select option:selected").val()
+   //    if(lngProjectPrice == "ru"){
+   //       lngProjectPrice = 
+   //    }
+   //    console.log(lngProjectPrice)
+   // }
    $("#select").on("change", () => {
       $('.data').empty();
       getData()
