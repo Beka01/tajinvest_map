@@ -33,17 +33,24 @@ $(document).ready(function () {
           snapshot.forEach(function (childSnapshot) {
               let sector = childSnapshot.val();
               sectorName = sector.name[lngCat]
+              snapshot.forEach(function (childSnapshot, catId){
+               elfilcat = `
+                  <option value="${catId}">${sectorName}</option>`
+                  $(".form-control category").append(elfilcat)
+              }),
+              
               sector.projects.forEach(el => {
                   element = `
                       <div class="card">
                          <div class="card-body">
                             <h5 class="card-title">${el.title[lngCat]}</h5>
-                            <p class="card-text">${el.description[lngCat]}</p>
+                            <p class="card-text">${el.descr[lngCat]}</p>
                             <span class = "badge badge-primary">${sectorName}</span> 
                             <span class = "badge badge-primary">${el.cost}</span> 
                          </div>
                       </div>`
                   $(".data").append(element)
+                  
               })
           });
       });
