@@ -24,23 +24,28 @@ $(document).ready(function () {
    let lngProjectPrice;
 
    const database = firebase.database();
-   const rootRef = database.ref('map/projects/sectors');
+   const rootRef = database.ref('map/sectors');
 
    function getData() {
-      
+      let sectorName = null
+      $(".data").empty()
       rootRef.once("value").then(function (snapshot) {
-         snapshot.forEach(function (childSnapshot) {
-            el = `
-            <div class="card" data-category="${childSnapshot.val()[lngCat]}">
-               <div class="card-body">
-                  <h5 class="card-title">${childSnapshot.val().title}</h5>
-                  <p class="card-text">${childSnapshot.val().description}</p>
-                  <span class = "badge badge-primary">${childSnapshot.val()[lngCat]}</span> 
-                  <span class = "badge badge-primary">${childSnapshot.key().cost}</span> 
-               </div>
-            </div>`
-            $('.data').append(el)
-         });
+          snapshot.forEach(function (childSnapshot) {
+              let sector = childSnapshot.val();
+              sectorName = sector.name[lngCat]
+              sector.projects.forEach(el => {
+                  element = `
+                      <div class="card">
+                         <div class="card-body">
+                            <h5 class="card-title">${el.title[lngCat]}</h5>
+                            <p class="card-text">${el.description[lngCat]}</p>
+                            <span class = "badge badge-primary">${sectorName}</span> 
+                            <span class = "badge badge-primary">${el.cost}</span> 
+                         </div>
+                      </div>`
+                  $(".data").append(element)
+              })
+          });
       });
       
    }
