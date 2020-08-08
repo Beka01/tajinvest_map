@@ -26,6 +26,7 @@ $(document).ready(function () {
    const rootRef = database.ref('map/projects/sectors');
 
    function getData() {
+      
       rootRef.once("value").then(function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             el = `
@@ -42,15 +43,15 @@ $(document).ready(function () {
    }
 
    getCategories();
-   function getCategories (){
+    function getCategories (){
       ruLngCat = $("#select option:selected").val()
-      if(ruLngCat == ("#select option[value='ru']")){
-         ruLngCat = "ru"
-      }else if (ruLngCat == ("#select option[value='tj']")){
-         ruLngCat = "tj"
-      }
+      console.log(ruLngCat)
    }
-   $("#select").on("change", () => getCategories())
+   $("#select").on("change", () => {
+      $('.data').empty();
+      getData()
+      getCategories()
+     })
 
    getData();
    
