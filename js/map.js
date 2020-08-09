@@ -78,14 +78,22 @@ $(function () {
   }
 
   getLang()
+  translateStaticText()
   getData()
 
   $("#select").on("change", () => {
     /* при изменении языка сначала мы его устанавливаем, потом обновляем первод у секторов и у проектов */
     getLang()
+    translateStaticText()
     updateSectors()
     updateProjects()
   })
+
+  function translateStaticText(){
+    $("[data-ru]").each((index, el) => {
+      $(el).text($(el).data(currentLang))
+    })
+  }
 
   /* по айдишнику мы одновляем текст у секторов */
   function updateSectors(){
