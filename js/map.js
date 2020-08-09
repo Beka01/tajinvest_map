@@ -13,7 +13,7 @@ $(function () {
    }
    firebase.initializeApp(firebaseConfig)
 
-   let lngCat
+   let currentLang
 
    const database = firebase.database()
    const rootRef = database.ref('map/sectors')
@@ -25,7 +25,7 @@ $(function () {
          snapshot.forEach(function(childSnapshot) {
 
             let sector = childSnapshot.val()
-            sectorName = sector.name[lngCat]
+            sectorName = sector.name[currentLang]
 
             snapshot.forEach(function(childSnapshot, catId){
                elfilcat = `<option value="${catId}">${sectorName}</option>`
@@ -36,8 +36,8 @@ $(function () {
                element = `
                   <div class="card">
                      <div class="card-body">
-                        <h5 class="card-title">${el.title[lngCat]}</h5>
-                        <p class="card-text">${el.descr[lngCat]}</p>
+                        <h5 class="card-title">${el.title[currentLang]}</h5>
+                        <p class="card-text">${el.descr[currentLang]}</p>
                         <span class = "badge badge-primary">${sectorName}</span> 
                         <span class = "badge badge-primary">${el.cost}</span> 
                      </div>
@@ -48,17 +48,16 @@ $(function () {
       })      
    }
 
-   getCategories()
+   getLang()
    
-   function getCategories (){
-      lngCat = $("#select option:selected").val()
-      console.log(lngCat)
+   function getLang(){
+      currentLang = $("#select option:selected").val()
    }
    
    $("#select").on("change", () => {
       $('.data').empty()
       getData()
-      getCategories()
+      getLang()
    })
 
    getData()
