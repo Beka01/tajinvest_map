@@ -30,7 +30,7 @@ $(function () {
     rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
       sectorsData.forEach(function (sector) { // проходим по каждому сектору
         sectors.push(sector.val().name) // запишем данные в массив для последующих манипуляций
-        sector.val().projects.forEach((projectData, projectId) => { // пройдем по всем проектам сектора
+        sector.val().projects.forEach((projectData) => { // пройдем по всем проектам сектора
           projectData.sectorId = sector.key
           projects.push(projectData) // для связи проекта с сектором укажем его айди
         })
