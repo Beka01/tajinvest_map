@@ -1,8 +1,6 @@
+'use sctrict'
 
-'use sctrict';
-$(document).ready(function () {
-
-   // Your web app's Firebase configuration
+$(function () {
    var firebaseConfig = {
       apiKey: "AIzaSyBMLcSR6ZjtTIgI_-5b8QqDY_TgaBiJ9DQ",
       authDomain: "tajinvest-a77b7.firebaseapp.com",
@@ -12,71 +10,58 @@ $(document).ready(function () {
       messagingSenderId: "257184881910",
       appId: "1:257184881910:web:ce9dccac5a8af6e25a20d7",
       measurementId: "G-7EETR5324V"
-   };
-   // Initialize Firebase
-   firebase.initializeApp(firebaseConfig);
+   }
+   firebase.initializeApp(firebaseConfig)
 
+   let lngCat
 
-   const title = document.getElementsByClassName('card-title');
-   const description = document.getElementsByClassName('card-text');
-   const category = document.getElementsByClassName('card-text');
-   let lngCat;
-   let lngProjectPrice;
-
-   const database = firebase.database();
-   const rootRef = database.ref('map/sectors');
+   const database = firebase.database()
+   const rootRef = database.ref('map/sectors')
 
    function getData() {
       let sectorName = null
       $(".data").empty()
-      rootRef.once("value").then(function (snapshot) {
-          snapshot.forEach(function (childSnapshot) {
-              let sector = childSnapshot.val();
-              sectorName = sector.name[lngCat]
-              snapshot.forEach(function (childSnapshot, catId){
-               elfilcat = `
-                  <option value="${catId}">${sectorName}</option>`
-                  $(".form-control category").append(elfilcat)
-              }),
-              
-              sector.projects.forEach(el => {
-                  element = `
-                      <div class="card">
-                         <div class="card-body">
-                            <h5 class="card-title">${el.title[lngCat]}</h5>
-                            <p class="card-text">${el.descr[lngCat]}</p>
-                            <span class = "badge badge-primary">${sectorName}</span> 
-                            <span class = "badge badge-primary">${el.cost}</span> 
-                         </div>
-                      </div>`
-                  $(".data").append(element)
-                  
-              })
-          });
-      });
-      
+      rootRef.once("value").then(function(snapshot) {
+         snapshot.forEach(function(childSnapshot) {
+
+            let sector = childSnapshot.val()
+            sectorName = sector.name[lngCat]
+
+            snapshot.forEach(function(childSnapshot, catId){
+               elfilcat = `<option value="${catId}">${sectorName}</option>`
+               $(".form-control category").append(elfilcat)
+            })
+
+            sector.projects.forEach(el => {
+               element = `
+                  <div class="card">
+                     <div class="card-body">
+                        <h5 class="card-title">${el.title[lngCat]}</h5>
+                        <p class="card-text">${el.descr[lngCat]}</p>
+                        <span class = "badge badge-primary">${sectorName}</span> 
+                        <span class = "badge badge-primary">${el.cost}</span> 
+                     </div>
+                  </div>`
+               $(".data").append(element)
+            })
+         })
+      })      
    }
 
-   getCategories();
-    function getCategories (){
+   getCategories()
+   
+   function getCategories (){
       lngCat = $("#select option:selected").val()
       console.log(lngCat)
    }
-   // getProjectCost();
-   //  function getProjectCost (){
-   //    lngProjectPrice = $("#select option:selected").val()
-   //    if(lngProjectPrice == "ru"){
-   //       lngProjectPrice = 
-   //    }
-   //    console.log(lngProjectPrice)
-   // }
+   
    $("#select").on("change", () => {
-      $('.data').empty();
+      $('.data').empty()
       getData()
       getCategories()
-     })
+   })
 
-   getData();
+   getData()
    
 
    //MAP 
@@ -101,6 +86,5 @@ $(document).ready(function () {
       })
       const markerCluster = new MarkerClusterer(map, markers)
    }
-   initMap();
-
-});
+   initMap()
+})
