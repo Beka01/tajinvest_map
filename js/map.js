@@ -55,7 +55,7 @@ $(function () {
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
             <span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span>
-            <span class="badge badge-primary">${project.cost}</span> 
+            <span class="badge badge-primary">${project.cost} mln $</span> 
           </div>
         </div>`
       $(".projects").append(projectCard) // добавим карту на страницу
@@ -119,14 +119,28 @@ $(function () {
   }
 
   function filterCompleted(project){
-    const selectedSectors = $(".sectors option:selected").val()
-    if (selectedSectors != 'all' && project.sectorId != selectedSectors) {
+    if (isSectorIncorrect(project.sectorId)) {
       return false
     }
+
+    if (isPriceInorrect(project.cost)) {
+      return false
+    }
+    
     return true
   }
 
-  $('.sectors').on('change', () => {
+  function isSectorIncorrect(sectorId){
+    const selectedSectors = $(".sectors option:selected").val()
+    return (selectedSectors != 'all' && sectorId != selectedSectors)
+  }
+
+  function isPriceInorrect(cost){
+    const selectedPrice = $(".prices option:selected")
+    return (selectedPrice.val() != 'all' && (selectedPrice.data('min') > cost || selectedPrice.data('max') <= cost))
+  }
+
+  $('.filter').on('change', () => {
     updateProjects()
   })
 
@@ -147,7 +161,7 @@ $(function () {
 
     let marker = new google.maps.Marker({
       position: latLng,
-      icon:'https://map.investcom.tj/wp-content/plugins/wp-google-map-gold/assets/images/icons/factory.png',
+      icon:'./images/sector'+project.sectorId+'.png',
     })
     marker.addListener("click", () => infowindow.open(map, marker))
     markers.push(marker)

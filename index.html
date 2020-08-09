@@ -21,10 +21,15 @@
 
     <div class="filter-div" style="width:100%; display: flex;">
 
-      <select class="form-control sectors">
-        <option value="all">All</option>
+      <select class="form-control sectors filter">
+        <option value="all">All sectors</option>
       </select>
-      <select class="form-control prices"></select>
+      <select class="form-control prices filter">
+        <option value="all">All prices</option>
+        <option value="0" data-min="0" data-max="5">0..5</option>
+        <option value="1" data-min="5" data-max="10">5..10</option>
+        <option value="2" data-min="10" data-max="100">10..100</option>
+      </select>
 
       <select id="select" class="form-control language">
         <option value="ru">Русский</option>
