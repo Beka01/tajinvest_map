@@ -103,15 +103,32 @@ $(function () {
 
     let currentProject
     projects.forEach((project, projectId) => {
-      currentProject = $("#project"+projectId)
-      currentProject.find('.title').text(project.title[currentLang])
-      currentProject.find('.descr').text(project.descr[currentLang])
-      currentProject.find('.title').text(sectors[project.sectorId][currentLang])
-      addMarkerToClusterer(project)
+      if (filterCompleted(project)) {
+        currentProject = $("#project"+projectId)
+        currentProject.show()
+        currentProject.find('.title').text(project.title[currentLang])
+        currentProject.find('.descr').text(project.descr[currentLang])
+        currentProject.find('.title').text(sectors[project.sectorId][currentLang])
+        addMarkerToClusterer(project)
+      } else {
+        $("#project"+projectId).hide()
+      }
     })
 
     setMarkerClusterer()
   }
+
+  function filterCompleted(project){
+    const selectedSectors = $(".sectors option:selected").val()
+    if (selectedSectors != 'all' && project.sectorId != selectedSectors) {
+      return false
+    }
+    return true
+  }
+
+  $('.sectors').on('change', () => {
+    updateProjects()
+  })
 
   function setMarkerClusterer()
   {
@@ -125,7 +142,7 @@ $(function () {
     )
 
     let infowindow = new google.maps.InfoWindow({
-      content: `<h1>${project.title[currentLang]}</h1><p>${project.descr[currentLang]}</p>`,
+      content: `<h4>${project.title[currentLang]} <span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h4><p>${project.descr[currentLang]}</p>`,
     })
 
     let marker = new google.maps.Marker({
