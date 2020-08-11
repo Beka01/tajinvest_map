@@ -1,0 +1,200 @@
+* {
+   font-family: 'Fira Sans', sans-serif; 
+}
+
+.filter-div {
+   display: flex;
+   width:100%;
+}
+select.form-control {
+   font-size: 16px;
+}
+#googleMap {
+   width: 100%;
+   height: 550px;
+}
+
+.card-body > h6 {
+   display: contents;
+}
+
+h5.card-title.title{
+   font-size: 17px;
+   
+   font-weight: 400;
+}
+p.card-text.descr{
+   font-size: 15px;
+  
+   font-weight: 300;
+}
+
+
+@media (max-width: 1200px){
+   .filter-div {
+      display: flex;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 14px;
+      
+   }
+   #googleMap {
+      height: 450px;
+   }
+   h5.card-title.title{
+      font-size: 17;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 15;
+      font-weight: 300;
+   }
+}
+
+@media (max-width: 992px){
+   .filter-div {
+      display: flex;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 14px;
+   }
+   
+   
+   #googleMap {
+      height: 400px;
+   }
+   h5.card-title.title{
+      font-size: 17px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 15px;
+      font-weight: 300;
+   }
+}
+
+@media (max-width: 768px){
+   .filter-div {
+      display: block;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 14px;
+   }
+   
+   
+   #googleMap {
+      height: 400px;
+   }
+   h5.card-title.title{
+      font-size: 16px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 14px;
+      font-weight: 300;
+   }
+}
+@media (max-width: 576px){
+   .filter-div {
+      display: block;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 14px;
+   }
+   
+   
+   #googleMap {
+      height: 400px;
+   }
+   h5.card-title.title{
+      font-size: 16px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 14px;
+      font-weight: 300;
+   }
+}
+@media (max-width: 486px){
+   .filter-div {
+      display: block;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 13px;
+   }
+   
+   
+   #googleMap {
+      height: 400px;
+   }
+   h5.card-title.title{
+      font-size: 15px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 13px;
+      font-weight: 300;
+   }
+}
+@media (max-width: 332px){
+   .filter-div {
+      display: block;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 12px;
+   }
+   #baggee {
+      font-size: 65%;
+   }
+   
+   #googleMap {
+      height: 400px;
+   }
+   h5.card-title.title{
+      font-size: 15px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 13px;
+      font-weight: 300;
+   }
+}
+
+@media (max-width: 276px){
+   .filter-div {
+      display: block;
+      width:100%;
+      
+   }
+   select.form-control  {
+      font-size: 11px;
+   }
+   #baggee {
+      font-size: 50%;
+   }
+   
+   #googleMap {
+      height: 350px;
+   }
+   h5.card-title.title{
+      font-size: 13px;
+      font-weight: 400;
+   }
+   p.card-text.descr{
+      font-size: 11px;
+      font-weight: 300;
+   }
+}
+   

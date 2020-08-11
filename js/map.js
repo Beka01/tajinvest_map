@@ -25,7 +25,7 @@ $(function () {
   const database = firebase.database()
   const rootRef = database.ref('map/sectors')
 
-  /* здесь мы с firebase получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
+  /* с firebase получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
   function getData() {
     rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
       sectorsData.forEach(function (sector) { // проходим по каждому сектору
@@ -46,7 +46,7 @@ $(function () {
     setProjects()
   }
 
-  /* проходим массив с проектами и создаем card а так же наносим метки на карту */
+  /*перебор массива с проектами и создание card с отметками на карте*/
   function setProjects(){
     projects.forEach((project, projectId) => {
       projectCard = `
@@ -54,8 +54,9 @@ $(function () {
           <div class="card-body">
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
-            <span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span>
-            <span class="badge badge-primary">${project.cost} mln $</span> 
+            <h6><span id="baggee" class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h6>
+            <h6><span data-ru="${project.realization} млн" data-tj="${project.realization} млн" data-en="${project.realization} mln" id="baggee" class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
+            <h6><span data-ru="${project.realization} г." data-tj="${project.realization} сол" data-en="${project.realization} years" id="baggee" class="badge badge badge-success">${project.realization} г.</span> </h6>
           </div>
         </div>`
       $(".projects").append(projectCard) // добавим карту на страницу
@@ -65,7 +66,7 @@ $(function () {
     setMarkerClusterer()
   }
 
-  /* первоначальная установка ввыпадающий список секторов */
+  /* первоначальная установка ввыпадающего списка секторов */
   function setSectors(){
     sectors.forEach((sector, sectorId) => {
       sectorOption = `<option id="sector${sectorId}" value="${sectorId}">${sector[currentLang]}</option>`
@@ -82,7 +83,7 @@ $(function () {
   getData()
 
   $("#select").on("change", () => {
-    /* при изменении языка сначала мы его устанавливаем, потом обновляем первод у секторов и у проектов */
+    /*обновление перевода секторов и проектов при изменении языка*/
     getLang()
     translateStaticText()
     updateSectors()
@@ -95,16 +96,16 @@ $(function () {
     })
   }
 
-  /* по айдишнику мы одновляем текст у секторов */
+  /* обновление текста секторов по ойди */
   function updateSectors(){
     sectors.forEach((sector, sectorId) => {
       $("#sector"+sectorId).text(sector[currentLang])
     })
   }
 
-  /* по айдишнику обновляем текст у проектов. Учитывать фильтры надо */
+  /* по айдишнику обновляем текст у проектов с учетом фильтра */
   function updateProjects(){
-    if (markerClusterer) { /* если на карте есть какие-то отметки, удаляем их */
+    if (markerClusterer) { /* удаляем отметки если на карте есть какие-то*/
       markerClusterer.clearMarkers()
       markers = []
     }
@@ -164,7 +165,7 @@ $(function () {
     )
 
     let infowindow = new google.maps.InfoWindow({
-      content: `<h4>${project.title[currentLang]} <span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h4><p>${project.descr[currentLang]}</p>`,
+      content: `<h6>${project.title[currentLang]} <span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h6><p>${project.descr[currentLang]}</p>`,
     })
 
     let marker = new google.maps.Marker({
@@ -177,7 +178,7 @@ $(function () {
 
   function initMap() {
     const mapProp = {
-      center: new google.maps.LatLng(38.554822, 68.776858),
+      center: new google.maps.LatLng(38.802352, 70.994508),
       zoom: 7,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
