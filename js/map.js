@@ -29,6 +29,7 @@ $(function () {
   function getData() {
     rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
       sectorsData.forEach(function (sector) { // проходим по каждому сектору
+        console.log(sector.val().projects)
         sectors.push(sector.val().name) // запишем данные в массив для последующих манипуляций
         sector.val().projects.forEach((projectData) => { // пройдем по всем проектам сектора
           projectData.sectorId = sector.key
@@ -54,9 +55,9 @@ $(function () {
           <div class="card-body">
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
-            <h6><span id="baggee" class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h6>
-            <h6><span data-ru="${project.realization} млн" data-tj="${project.realization} млн" data-en="${project.realization} mln" id="baggee" class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
-            <h6><span data-ru="${project.realization} г." data-tj="${project.realization} сол" data-en="${project.realization} years" id="baggee" class="badge badge badge-success">${project.realization} г.</span> </h6>
+            <h6><span class="badge badge-primary project-sector">${sectors[project.sectorId][currentLang]}</span></h6>
+            <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
+            <h6><span data-ru="${project.realization} г." data-tj="${project.realization} сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
           </div>
         </div>`
       $(".projects").append(projectCard) // добавим карту на страницу
@@ -117,7 +118,7 @@ $(function () {
         currentProject.show()
         currentProject.find('.title').text(project.title[currentLang])
         currentProject.find('.descr').text(project.descr[currentLang])
-        currentProject.find('.title').text(sectors[project.sectorId][currentLang])
+        currentProject.find('.project-sector').text(sectors[project.sectorId][currentLang])
         addMarkerToClusterer(project)
       } else {
         $("#project"+projectId).hide()
