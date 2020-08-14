@@ -1,0 +1,288 @@
+{
+  "sectors": [
+    {
+      "en": "AGRICULTURE",
+      "ru": "СЕЛЬСКОЕ ХОЗЯЙСТВО",
+      "tj": "КИШОВАРЗИ"
+    },
+    {
+      "en": "MINING AND CONSTRUCTION MATERIALS",
+      "ru": "ПОЛЕЗНЫЕ ИСКОПАЕМЫЕ И СТРОЙМАТЕРИАЛЫ",
+      "tj": "КАНДАНИҲОИ ФОИДАНОК ВА МАСОЛЕҲИСОХТМОНӢ"
+    },
+    {
+      "en": "ENERGY",
+      "ru": "ЭНЕРГЕТИКА",
+      "tj": "ЭНЕРГЕТИКА"
+    },
+    {
+      "en": "FINANCE AND BANKING",
+      "ru": "ФИНАНСЫ И БАНКОВСКОЕ ДЕЛО",
+      "tj": "МОЛИЯ ВА БОНКДОРӢ"
+    },
+    {
+      "en": "INDUSTRY",
+      "ru": "ПРОМЫШЛЕННОСТЬ",
+      "tj": "САНОАТ"
+    },
+    {
+      "en": "INFRASTRUCTURE",
+      "ru": "ИНФРАСТРУКТУРА",
+      "tj": "ИНФРАСОХТОР"
+    },
+    {
+      "en": "OTHERS",
+      "ru": "ДРУГИЕ",
+      "tj": "ДИГАР СОҲАҲО"
+    },
+    {
+      "en": "TOURISM",
+      "ru": "ТУРИЗМ",
+      "tj": "САЙЁҲӢ"
+    }
+  ],
+  "projects": [
+    {
+      "cost": 1.7,
+      "descr": {
+        "en": "The main objective of the project is to create Fish farm for the production and processing of the fish and sale in local markets and export to neighboring countries.",
+        "ru": "Основная цель проекта - создание рыбной фермы для производства и переработки рыбы, продажи на местных рынках и экспорта в соседние страны.",
+        "tj": "Ҳадафи асосии лоиҳа ташкили фермаи моҳипарварӣ барои истеҳсол ва коркарди моҳӣ ва фурӯш дар бозорҳои маҳаллӣ ва содирот ба кишварҳои ҳамсоя мебошад."
+      },
+      "lat": 38.58995,
+      "lon": 68.79545,
+      "realization": 2,
+      "region": {
+        "en": "Dushanbe",
+        "ru": "Душанбе",
+        "tj": "Душанбе"
+      },
+      "title": {
+        "en": "Creation of a fishing enterprise in the Rudaki district",
+        "ru": "Создание рыболовного предприятия в районе Рудаки.",
+        "tj": "Таъсиси корхонаи моҳидорӣ дар ноҳияи Рӯдакӣ"
+      },
+      "sectorId": "0"
+    },
+    {
+      "cost": 3.2,
+      "descr": {
+        "en": "Development of new deposits, The development of the mining industry, Increasing the export potential of the country, Production of competitive products.",
+        "ru": "Освоение новых месторождений, Развитие горнодобывающей промышленности, Повышение экспортного потенциала страны, Производство конкурентоспособной продукции.",
+        "tj": "Азхудкунии конҳои нав, Рушди саноати маъданҳои кӯҳӣ, Баланд бардоштани иқтидори содиротии кишвар, Истеҳсоли маҳсулоти рақобатбардор."
+      },
+      "lat": 38.596148,
+      "lon": 68.294515,
+      "realization": 1.5,
+      "region": {
+        "en": "Districts of republican subordination",
+        "ru": "Районы республиканского подчинения",
+        "tj": "Ноҳияҳои тобеи ҷумҳурӣ"
+      },
+      "title": {
+        "en": "Production of raw materials from muscovites for aluminum production within the Kurgovat manifestation.",
+        "ru": "Производство сырья из москвичей для производства алюминия в пределах Курговатской манифестации.",
+        "tj": "Истеҳсоли ашёи хом аз мусковитҳо барои истеҳсоли алюминий дар зуҳуроти Курговат."
+      },
+      "sectorId": "1"
+    },
+    {
+      "cost": 3,
+      "descr": {
+        "en": "For the production of ceramic tiles there are all types of raw materials used in the production technology of ceramic tiles: kaolin, quartz sand, feldspar, dolomite and porphyrite.",
+        "ru": "Для производства керамической плитки используются все виды сырья, которое используется в технологии производства керамической плитки: каолин, кварц, полевой шпат, доломит и порфировидный раствор.",
+        "tj": "Барои истеҳсоли сафолҳои сафолӣ ҳама намудҳои ашёи хом истифода мешаванд, ки дар технологияи истеҳсоли сафолҳои сафолӣ истифода мешаванд: каолин, кварц, фельдшер, доломит ва маҳлули порфирӣ."
+      },
+      "lat": 38.09448,
+      "lon": 69.338933,
+      "realization": 6,
+      "region": {
+        "en": "Khatlon",
+        "ru": "Хатлонская область",
+        "tj": "Вилояти Хатлон"
+      },
+      "title": {
+        "en": "Construction of a ceramic facing plates plant in FEZ \"Dangara\"",
+        "ru": "Строительство завода по производству облицовочных керамических плит в СЭЗ «Дангара».",
+        "tj": "Сохтмони иншооти обӣ дар минтақаи озоди иқтисодии \"Дангара\""
+      },
+      "sectorId": "2"
+    },
+    {
+      "cost": 2.5,
+      "descr": {
+        "en": "Construction of a tourist base in the mountain – ecological zones.",
+        "ru": "Постройка комплекса в горах в экологической зоне",
+        "tj": "Сохтмони базаи туристии дар кух дар зонаи экологи"
+      },
+      "lat": 37.666968,
+      "lon": 68.819492,
+      "realization": 3,
+      "region": {
+        "en": "Khatlon",
+        "ru": "Хатлонская область",
+        "tj": "Вилояти Хатлон"
+      },
+      "title": {
+        "en": "Construction and modernization of the tourist complex \"Gulobod\"",
+        "ru": "Постройка и реализация туристического комплекса \"Гулобод\"",
+        "tj": "Сохтмони базаи туристии \"Гулобод\""
+      },
+      "sectorId": "2"
+    },
+    {
+      "cost": 1.8,
+      "descr": {
+        "en": "Construction of a transport and logistics center in the Sughd Free Economic Zone.",
+        "ru": "Строительство транспортно-логистического центра в свободной экономической зоне «Сугд».",
+        "tj": "Сохтмони маркази нақлиётӣ ва логистикӣ дар минтақаи озоди иқтисодии Суғд."
+      },
+      "lat": 37.495539,
+      "lon": 71.610362,
+      "realization": 1,
+      "region": {
+        "en": "Gorno-Badakhshan Autonomous Oblast",
+        "ru": "Горно-Бадахшанская автономная область",
+        "tj": "Вилояти Мухтори Кӯҳистони Бадахшон"
+      },
+      "title": {
+        "en": "Construction of transport and logistics center",
+        "ru": "Строительство транспортно-логистического центра",
+        "tj": "Сохтмони маркази нақлиётӣ ва логистикӣ"
+      },
+      "sectorId": "3"
+    },
+    {
+      "cost": 7,
+      "descr": {
+        "en": "Construction of a tourist base in the mountain – ecological zones.",
+        "ru": "Строительство туристической базы в горно-экологической зоне.",
+        "tj": "Сохтмони пойгоҳи туристӣ дар минтақаҳои кӯҳӣ - экологӣ."
+      },
+      "lat": 40.653298,
+      "lon": 69.459693,
+      "realization": 2,
+      "region": {
+        "en": "Согдийская область",
+        "ru": "Sughd region",
+        "tj": "Вилояти Суғд"
+      },
+      "title": {
+        "en": "Construction of the hotel \"Daray gurgon\"",
+        "ru": "Строительство гостиницы \"Дарай гургон\"",
+        "tj": "Сохтмони меҳмонхонаи \"Дарай гургаон\""
+      },
+      "sectorId": "4"
+    },
+    {
+      "cost": 1,
+      "descr": {
+        "en": "The main goal of this project is the construction of a factory for the storage and drying of vegetables and fruits of Faizi Istiklol LLC in the Dangara FEZ",
+        "ru": "Основная цель данного проекта - строительство завода по хранению и сушке овощей и фруктов ООО «Файзи Истиклол» в СЭЗ «Дангара».",
+        "tj": "Мақсади асосии ин лоиҳа сохтмони корхонаи нигоҳдорӣ ва хушк кардани сабзавот ва меваҳои ҶДММ «Файзи Истиқлол» дар МОИ Данғара"
+      },
+      "lat": 40.126662,
+      "lon": 70.493302,
+      "realization": 2.5,
+      "region": {
+        "en": "Согдийская область",
+        "ru": "Sughd region",
+        "tj": "Вилояти Суғд"
+      },
+      "title": {
+        "en": "Construction of the plant for the storage and drying of vegetables and fruits",
+        "ru": "Строительство завода по хранению и сушке овощей и фруктов.",
+        "tj": "Сохтмони корхонаи нигоҳдорӣ ва хушк кардани сабзавот ва меваҳо."
+      },
+      "sectorId": "4"
+    },
+    {
+      "cost": 6,
+      "descr": {
+        "en": "Construction of a tourist base in the mountain – ecological zones.",
+        "ru": "Строительство туристической базы в горно-экологической зоне.",
+        "tj": "Сохтмони пойгоҳи туристӣ дар минтақаҳои кӯҳӣ - экологӣ."
+      },
+      "lat": 38.625103,
+      "lon": 68.617407,
+      "realization": 3,
+      "region": {
+        "en": "Dushanbe",
+        "ru": "Душанбе",
+        "tj": "Душанбе"
+      },
+      "title": {
+        "en": "Tourist center \"Hakimi\"",
+        "ru": "Туристический центр \"Хакими\"",
+        "tj": "Маркази сайёҳии \"Ҳакими\""
+      },
+      "sectorId": "5"
+    },
+    {
+      "cost": 11,
+      "descr": {
+        "en": "Development of new deposits, Development of the mining industry, Increasing the export potential of the country, Production of competitive products and the creation of jobs.",
+        "ru": "Освоение новых месторождений, Развитие горнодобывающей промышленности, Повышение экспортного потенциала страны, Производство конкурентоспособной продукции и создание рабочих мест.",
+        "tj": "Азхудкунии конҳои нав, Рушди саноати маъданҳои кӯҳӣ, Баланд бардоштани иқтидори содиротии кишвар, Истеҳсоли маҳсулоти рақобатпазир ва ташкили ҷойҳои корӣ."
+      },
+      "lat": 38.502393,
+      "lon": 68.679905,
+      "realization": 5,
+      "region": {
+        "en": "Dushanbe",
+        "ru": "Душанбе",
+        "tj": "Душанбе"
+      },
+      "title": {
+        "en": "Geological exploration with subsequent iron mining within the \"Bartsch\" manifestation (iron)",
+        "ru": "Геологоразведочные работы с последующей добычей железа в пределах проявления «Бартч» (железо)",
+        "tj": "Кофтукови геологӣ бо истихроҷи оҳан дар зуҳуроти минбаъдаи \"Бартч\" (оҳан)"
+      },
+      "sectorId": "6"
+    },
+    {
+      "cost": 5,
+      "descr": {
+        "en": "Acquisition of a high-tech complex for processing semi-precious and ornamental stones and manufacturing products from them. The implementation of the project makes it possible to produce in the country and then export it.",
+        "ru": "Приобретение высокотехнологичного комплекса по обработке полудрагоценных и поделочных камней и изготовления изделий из них. Реализация проекта дает возможность производить в стране, а затем экспортировать.",
+        "tj": "Ба даст овардани як маҷмӯи технологияҳои коркарди сангҳои қиматбаҳо ва ороишӣ ва маҳсулоти онҳо аз онҳо. Татбиқи лоиҳа имкон медиҳад, ки истеҳсол дар дохили кишвар ва пас аз он содир карда шавад."
+      },
+      "lat": 40.703408,
+      "lon": 70.437659,
+      "realization": 8,
+      "region": {
+        "en": "Согдийская область",
+        "ru": "Sughd region",
+        "tj": "Вилояти Суғд"
+      },
+      "title": {
+        "en": "Acquisition of equipment for an enterprise for processing semi-precious and ornamental stones",
+        "ru": "Приобретение оборудования для предприятия по обработке полудрагоценных и поделочных камней.",
+        "tj": "Хариди таҷҳизот барои корхонаи коркарди сангҳои қиматбаҳо ва ороишӣ"
+      },
+      "sectorId": "7"
+    },
+    {
+      "cost": 4.5,
+      "descr": {
+        "en": "Acquisition of a high-tech complex for processing semi-precious and ornamental stones and manufacturing products from them. The implementation of the project makes it possible to produce in the country and then export it.",
+        "ru": "Создание совместного предприятия по производству обуви с учетом использования местного сырья и организации качественного ассортимента и обслуживания, индивидуального подхода к каждому покупателю. Реализация проекта даст возможность повысить значимость продукции местного производства на рынке и принять активное участие в развитии страны.",
+        "tj": "Ташкили корхонаи муштарак оид ба истеҳсоли пойафзол, бо назардошти истифодаи ашёи хоми маҳаллӣ ва ташкили навъ ва хизматрасонӣ, муносибати инфиродӣ ба ҳар як фармоишгар. Татбиқи лоиҳа барои баланд бардоштани аҳамияти маҳсулоти ватанӣ дар бозор ва иштироки фаъолона дар рушди кишвар имконият фароҳам меорад."
+      },
+      "lat": 39.880704,
+      "lon": 69.048145,
+      "realization": 1,
+      "region": {
+        "en": "Согдийская область",
+        "ru": "Sughd region",
+        "tj": "Вилояти Суғд"
+      },
+      "title": {
+        "en": "Construction of a shoe factory",
+        "ru": "Строительство обувной фабрики.",
+        "tj": "Сохтмони фабрикаи пойафзол"
+      },
+      "sectorId": "7"
+    }
+  ]
+}

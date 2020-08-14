@@ -8,36 +8,14 @@ let projects = []
 
 $(function () {
 
-  let firebaseConfig = {
-    apiKey: "AIzaSyBMLcSR6ZjtTIgI_-5b8QqDY_TgaBiJ9DQ",
-    authDomain: "tajinvest-a77b7.firebaseapp.com",
-    databaseURL: "https://tajinvest-a77b7.firebaseio.com",
-    projectId: "tajinvest-a77b7",
-    storageBucket: "tajinvest-a77b7.appspot.com",
-    messagingSenderId: "257184881910",
-    appId: "1:257184881910:web:ce9dccac5a8af6e25a20d7",
-    measurementId: "G-7EETR5324V"
-  }
-  firebase.initializeApp(firebaseConfig)
-
   let currentLang
 
-  const database = firebase.database()
-  const rootRef = database.ref('map/sectors')
-
-  /* с firebase получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
+  /* получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
   function getData() {
-    rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
-      sectorsData.forEach(function (sector) { // проходим по каждому сектору
-        console.log(sector.val().projects)
-        sectors.push(sector.val().name) // запишем данные в массив для последующих манипуляций
-        sector.val().projects.forEach((projectData) => { // пройдем по всем проектам сектора
-          projectData.sectorId = sector.key
-          projects.push(projectData) // для связи проекта с сектором укажем его айди
-        })
-      })
-    }).then(() => {
-      createPage()      
+    $.getJSON('get.json', data => {
+      sectors = data.sectors
+      projects = data.projects
+      createPage()
     })
   }
 
