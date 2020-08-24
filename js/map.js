@@ -8,7 +8,7 @@ let projects = [];
 let projectCard = [];
 let limitPerPage = 5;
 let numberofItems = 0;
-//let totalOfPages =0;
+let totalOfPages = 0;
 
 
 $(function () {
@@ -30,25 +30,25 @@ $(function () {
   const database = firebase.database();
   const rootRef = database.ref('map/sectors');
   const rootProjects = database.ref('map/projects');
-  
+
   /* с firebase получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
   function getData() {
     rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
       sectorsData.forEach(function (sector) { // проходим по каждому сектору
         sectors[sector.key] = sector.val();
-        
+
       });
     });
-    
+
     rootProjects.once("value").then(function (projectsData) { // получили все данные с базы
       projectsData.forEach(function (project) { // проходим по каждому сектору
-       
+
         projects.push(project.val()); // запишем данные в массив для последующих манипуляций
-        
+
       });
     }).then(() => {
-      createPage();   
-      
+      createPage();
+
     });
   }
 
@@ -57,100 +57,88 @@ $(function () {
     setSectors();
     setProjects();
   }
-  
+
   /*перебор массива с проектами и создание card с отметками на карте*/
   function setProjects(){
     projects.forEach((project, projectId) => {
-      //console.log(project);
       projectCard = `
-        <div id="project${projectId}" class="card project">
-        
+        <div id="project${projectId}" class="card project filtered">
           <div class="card-body">
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
             <h6><span class="badge badge-primary project-sector">${sectors[project.sector][currentLang]}</span></h6>
-            <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" 
+            <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln"
             class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
             <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
           </div>
         </div>`;
-        
       $(".projects").append(projectCard); // добавим карту на страницу
       addMarkerToClusterer(project);
       numberofItems++;
-      
     });
-      setMarkerClusterer();
-      //console.log(numberofItems);
-     pagination();
-      
-    
-    // 
+    setMarkerClusterer();
+    pagination();
   }
 
-  function pagination () {
-    $(".project:gt("+ (limitPerPage-1) +")").hide();
-      let totalOfPages = Math.round(numberofItems / limitPerPage);
-      $(".pagination").append("<li id='previous-page' class='page-previous'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
-      $(".pagination").append("<li class='page-item active' class='page-item'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
-      for(let i=2; i<=totalOfPages; i++){
-        $(".pagination").append("<li  class='page-item'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+  $(".pagination").on("click", 'li.page-item', function(){
+    if($(this).hasClass("active")){
+      return false;
+    } else {
+      let currentPage = $(this).index();
+      $(".pagination li").removeClass("active");
+      $(this).addClass("active");
+      $(".filtered").hide();
+
+      let grandTotal = limitPerPage * currentPage;
+      for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+        $(".filtered:eq("+ s +")").show();
       }
-      $(".pagination").append("<li id='next-page' class='page-next'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
-     
-      //
-      $(".pagination li.page-item").on("click", function(){
-        if($(this).hasClass("active")){
+    }
+  });
+
+  $(".pagination").on("click", "#next-page", function(){
+    let currentPage = $(".pagination li.active").index();
+      if(currentPage === totalOfPages){
           return false;
-        } else {
-          let currentPage = $(this).index();
-          $(".pagination li").removeClass("active");
-          $(this).addClass("active");
-          $(".project").hide();
+      } else {
+        currentPage++;
+        $(".pagination li").removeClass("active");
+        $(".filtered").hide();
+        let grandTotal = limitPerPage * currentPage;
+        for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+          $(".filtered:eq("+ s +")").show();
+      }
+      $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
+    }
+  });
 
-          let grandTotal = limitPerPage * currentPage;
-          for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
-              $(".project:eq("+ s +")").show();
-          }
-        }
-      });
-      
+  $(".pagination").on("click", "#previous-page", function(){
+    let currentPage = $(".pagination li.active").index();
+      if(currentPage === 1){
+          return false;
+      } else {
+        currentPage--;
+        $(".pagination li").removeClass("active");
+        $(".filtered").hide();
+        let grandTotal = limitPerPage * currentPage;
+         for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+          $(".filtered:eq("+ s +")").show();
+      }
+      $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
+    }
+  });
 
-      $("#next-page").on("click", function(){
-        let currentPage = $(".pagination li.active").index();
-          if(currentPage === totalOfPages){
-              return false;
-          } else {
-            currentPage++;
-            $(".pagination li").removeClass("active");
-            $(".project").hide();
-            let grandTotal = limitPerPage * currentPage;
-             for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
-              $(".project:eq("+ s +")").show();
-          }
-          $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
-        }
-      });
-
-      $("#previous-page").on("click", function(){
-        let currentPage = $(".pagination li.active").index();
-          if(currentPage === 1){
-              return false;
-          } else {
-            currentPage--;
-            $(".pagination li").removeClass("active");
-            $(".project").hide();
-            let grandTotal = limitPerPage * currentPage;
-             for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
-              $(".project:eq("+ s +")").show();
-          }
-          $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
-        }
-      });
+  function pagination() {
+    $('.pagination').empty()
+    $(".filtered:gt("+ (limitPerPage-1) +")").hide();
+    totalOfPages = Math.round(numberofItems / limitPerPage);
+    $(".pagination").append("<li id='previous-page' class='page-previous'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+    $(".pagination").append("<li class='page-item active' class='page-item'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+    for(let i=2; i<=totalOfPages; i++){
+      $(".pagination").append("<li  class='page-item'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+    }
+    $(".pagination").append("<li id='next-page' class='page-next'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
   }
-
-// <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-  
 
   /* первоначальная установка ввыпадающего списка секторов */
   function setSectors(){
@@ -159,7 +147,7 @@ $(function () {
       $(".sectors").append(sectorOption);
     });
   }
-  
+
   function getLang(){
     currentLang = $("#select option:selected").val();
   }
@@ -197,21 +185,25 @@ $(function () {
     }
 
     let currentProject;
+    numberofItems = 0
+    $(".project").removeClass("filtered")
     projects.forEach((project, projectId) => {
       if (filterCompleted(project)) {
         currentProject = $("#project"+projectId);
-        currentProject.show();
+        currentProject.show().addClass("filtered");
         currentProject.find('.title').text(project.title[currentLang]);
         currentProject.find('.descr').text(project.descr[currentLang]);
         currentProject.find('.project-sector').text(sectors[project.sector][currentLang]);
         addMarkerToClusterer(project);
+        numberofItems++
       } else {
         $("#project"+projectId).hide();
       }
     });
+    pagination()
 
     setMarkerClusterer();
-    
+
   }
 
   function filterCompleted(project){
@@ -222,9 +214,9 @@ $(function () {
     if (isPriceInorrect(project.cost)) {
       return false;
     }
-    
+
     return true;
-    
+
   }
 
   function isSectorIncorrect(sectorId){
@@ -250,10 +242,10 @@ $(function () {
     let latLng = new google.maps.LatLng(
       project.lat,
       project.lon
-      
+
     );
 
-    
+
     let infowindow = new google.maps.InfoWindow({
       content: `
       <div class="card-body">
@@ -264,27 +256,27 @@ $(function () {
               <h6><span class="badge badge-primary project-sector">${sectors[project.sector][currentLang]}</span></h6>
           </div>
           <div class="badge-popup">
-              <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" class="badge badge badge-secondary">${project.cost} млн $</span> </h6> 
+              <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
           </div>
           <div class="badge-popup">
-              <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6> 
-          </div>  
+              <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
+          </div>
           <div class="badge-buttons">
           <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-download"></i></button>
-          </div>  
-                  
+          </div>
+
       </div>`,
     });
     map.addListener('click', function() {
       if (infowindow)
        infowindow.close();
     });
-    
+
 
     let marker = new google.maps.Marker({
       position: latLng,
       icon:'./images/sector'+project.sector+'.png',
-    
+
     });
     marker.addListener("click", () => infowindow.open(map, marker));
     markers.push(marker);
