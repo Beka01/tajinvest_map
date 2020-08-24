@@ -5,6 +5,11 @@ let markerClusterer = null;
 let markers = [];
 let sectors = [];
 let projects = [];
+let projectCard = [];
+let limitPerPage = 5;
+let numberofItems = 0;
+//let totalOfPages =0;
+
 
 $(function () {
 
@@ -30,10 +35,8 @@ $(function () {
   function getData() {
     rootRef.once("value").then(function (sectorsData) { // получили все данные с базы
       sectorsData.forEach(function (sector) { // проходим по каждому сектору
-       
-        sectors.push(sector.val()); // запишем данные в массив для последующих манипуляций
         sectors[sector.key] = sector.val();
-        //console.log(sectors[sector.key]);
+        
       });
     });
     
@@ -44,7 +47,8 @@ $(function () {
         
       });
     }).then(() => {
-      createPage();    
+      createPage();   
+      
     });
   }
 
@@ -53,12 +57,12 @@ $(function () {
     setSectors();
     setProjects();
   }
-
+  
   /*перебор массива с проектами и создание card с отметками на карте*/
   function setProjects(){
     projects.forEach((project, projectId) => {
       //console.log(project);
-      let projectCard = `
+      projectCard = `
         <div id="project${projectId}" class="card project">
         
           <div class="card-body">
@@ -67,18 +71,86 @@ $(function () {
             <h6><span class="badge badge-primary project-sector">${sectors[project.sector][currentLang]}</span></h6>
             <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" 
             class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
-            <h6><span data-ru="${project.realization} г." data-tj="${project.realization} 
-            сол" data-en="${project.realization} years" 
-            class="badge badge badge-success">${project.realization} г.</span> </h6>
+            <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
           </div>
         </div>`;
         
       $(".projects").append(projectCard); // добавим карту на страницу
       addMarkerToClusterer(project);
+      numberofItems++;
+      
     });
-
-    setMarkerClusterer();
+      setMarkerClusterer();
+      //console.log(numberofItems);
+     pagination();
+      
+    
+    // 
   }
+
+  function pagination () {
+    $(".project:gt("+ (limitPerPage-1) +")").hide();
+      let totalOfPages = Math.round(numberofItems / limitPerPage);
+      $(".pagination").append("<li id='previous-page' class='page-previous'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+      $(".pagination").append("<li class='page-item active' class='page-item'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+      for(let i=2; i<=totalOfPages; i++){
+        $(".pagination").append("<li  class='page-item'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+      }
+      $(".pagination").append("<li id='next-page' class='page-next'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+     
+      //
+      $(".pagination li.page-item").on("click", function(){
+        if($(this).hasClass("active")){
+          return false;
+        } else {
+          let currentPage = $(this).index();
+          $(".pagination li").removeClass("active");
+          $(this).addClass("active");
+          $(".project").hide();
+
+          let grandTotal = limitPerPage * currentPage;
+          for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+              $(".project:eq("+ s +")").show();
+          }
+        }
+      });
+      
+
+      $("#next-page").on("click", function(){
+        let currentPage = $(".pagination li.active").index();
+          if(currentPage === totalOfPages){
+              return false;
+          } else {
+            currentPage++;
+            $(".pagination li").removeClass("active");
+            $(".project").hide();
+            let grandTotal = limitPerPage * currentPage;
+             for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+              $(".project:eq("+ s +")").show();
+          }
+          $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
+        }
+      });
+
+      $("#previous-page").on("click", function(){
+        let currentPage = $(".pagination li.active").index();
+          if(currentPage === 1){
+              return false;
+          } else {
+            currentPage--;
+            $(".pagination li").removeClass("active");
+            $(".project").hide();
+            let grandTotal = limitPerPage * currentPage;
+             for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
+              $(".project:eq("+ s +")").show();
+          }
+          $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
+        }
+      });
+  }
+
+// <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
+  
 
   /* первоначальная установка ввыпадающего списка секторов */
   function setSectors(){
@@ -139,6 +211,7 @@ $(function () {
     });
 
     setMarkerClusterer();
+    
   }
 
   function filterCompleted(project){
@@ -151,6 +224,7 @@ $(function () {
     }
     
     return true;
+    
   }
 
   function isSectorIncorrect(sectorId){
@@ -176,12 +250,36 @@ $(function () {
     let latLng = new google.maps.LatLng(
       project.lat,
       project.lon
+      
     );
 
+    
     let infowindow = new google.maps.InfoWindow({
-      content: `<h6>${project.title[currentLang]} <span class="badge badge-primary project-sector">
-      ${sectors[project.sector][currentLang]}</span></h6><p>${project.descr[currentLang]}</p>`,
+      content: `
+      <div class="card-body">
+          <h5 id="popup-title" class="card-title title">${project.title[currentLang]}</h5>
+           <p id="popup-descr"class="card-text descr">${project.descr[currentLang]}</p>
+          <div class="badge-wrapper">
+            <div class="badge-popup">
+              <h6><span class="badge badge-primary project-sector">${sectors[project.sector][currentLang]}</span></h6>
+          </div>
+          <div class="badge-popup">
+              <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln" class="badge badge badge-secondary">${project.cost} млн $</span> </h6> 
+          </div>
+          <div class="badge-popup">
+              <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6> 
+          </div>  
+          <div class="badge-buttons">
+          <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-download"></i></button>
+          </div>  
+                  
+      </div>`,
     });
+    map.addListener('click', function() {
+      if (infowindow)
+       infowindow.close();
+    });
+    
 
     let marker = new google.maps.Marker({
       position: latLng,

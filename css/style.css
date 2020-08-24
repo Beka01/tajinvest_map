@@ -14,6 +14,30 @@ select.form-control {
    height: 550px;
 }
 
+#baggee {
+   font-size: 12px;
+   margin-right: 10px;
+}
+.badge-wrapper{
+  display: flex;
+  margin-top: 30px;
+}
+.badge-popup{
+   margin-right: 10px;
+}
+.badge-real{
+   margin-top: 0;
+   
+}
+
+.pagi-nation{
+   margin-top: 10px; 
+}
+.badge-buttons{
+   margin-left:auto; 
+   margin-right:0;
+}
+
 .card-body > h6 {
    display: contents;
 }
@@ -63,7 +87,10 @@ p.card-text.descr{
       font-size: 14px;
    }
    
-   
+   .gm-style .gm-style-iw-c {
+      max-width: 500px;
+   }
+
    #googleMap {
       height: 400px;
    }
@@ -122,6 +149,10 @@ p.card-text.descr{
       font-size: 14px;
       font-weight: 300;
    }
+   .badge-wrapper{
+      display: block;
+      margin-top: 30px;
+    }
 }
 @media (max-width: 486px){
    .filter-div {
@@ -155,8 +186,9 @@ p.card-text.descr{
    select.form-control  {
       font-size: 12px;
    }
-   #baggee {
-      font-size: 65%;
+
+   .badge.badge-primary.project-sector{
+      font-size: 60%;
    }
    
    #googleMap {
@@ -181,8 +213,9 @@ p.card-text.descr{
    select.form-control  {
       font-size: 11px;
    }
-   #baggee {
-      font-size: 50%;
+   
+   .badge.badge-primary.project-sector{
+      font-size: 55%;
    }
    
    #googleMap {
