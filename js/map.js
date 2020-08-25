@@ -6,7 +6,7 @@ let markers = [];
 let sectors = [];
 let projects = [];
 let projectCard = [];
-let limitPerPage = 5;
+let limitPerPage = 10;
 let numberofItems = 0;
 let totalOfPages = 0;
 
@@ -30,6 +30,8 @@ $(function () {
   const database = firebase.database();
   const rootRef = database.ref('map/sectors');
   const rootProjects = database.ref('map/projects');
+  
+
 
   /* с firebase получаем все данные и создаем два массива. Массив с категориями и массив с проектами*/
   function getData() {
@@ -62,7 +64,7 @@ $(function () {
   function setProjects(){
     projects.forEach((project, projectId) => {
       projectCard = `
-        <div id="project${projectId}" class="card project filtered">
+        <div id="project${projectId}" class="card project filtered p-3 my-3 bg-dark text-white">
           <div class="card-body">
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
@@ -129,11 +131,11 @@ $(function () {
   });
 
   function pagination() {
-    $('.pagination').empty()
+    $('.pagination').empty();
     $(".filtered:gt("+ (limitPerPage-1) +")").hide();
     totalOfPages = Math.round(numberofItems / limitPerPage);
     $(".pagination").append("<li id='previous-page' class='page-previous'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
-    $(".pagination").append("<li class='page-item active' class='page-item'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+    $(".pagination").append("<li class='page-item active ' class='page-item'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
     for(let i=2; i<=totalOfPages; i++){
       $(".pagination").append("<li  class='page-item'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
     }
@@ -185,8 +187,8 @@ $(function () {
     }
 
     let currentProject;
-    numberofItems = 0
-    $(".project").removeClass("filtered")
+    numberofItems = 0;
+    $(".project").removeClass("filtered");
     projects.forEach((project, projectId) => {
       if (filterCompleted(project)) {
         currentProject = $("#project"+projectId);
@@ -195,12 +197,12 @@ $(function () {
         currentProject.find('.descr').text(project.descr[currentLang]);
         currentProject.find('.project-sector').text(sectors[project.sector][currentLang]);
         addMarkerToClusterer(project);
-        numberofItems++
+        numberofItems++;
       } else {
         $("#project"+projectId).hide();
       }
     });
-    pagination()
+    pagination();
 
     setMarkerClusterer();
 
@@ -248,7 +250,7 @@ $(function () {
 
     let infowindow = new google.maps.InfoWindow({
       content: `
-      <div class="card-body">
+      <div class="card-body ">
           <h5 id="popup-title" class="card-title title">${project.title[currentLang]}</h5>
            <p id="popup-descr"class="card-text descr">${project.descr[currentLang]}</p>
           <div class="badge-wrapper">
@@ -262,14 +264,16 @@ $(function () {
               <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
           </div>
           <div class="badge-buttons">
-          <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-download"></i></button>
+          <button onclick="window.open(href='${project.doc[currentLang]}')" target="_blank"  type="button" class="btn btn-danger btn-sm"><i class="fas fa-download"></i></button>
           </div>
-
       </div>`,
     });
+
     map.addListener('click', function() {
       if (infowindow)
        infowindow.close();
+
+       
     });
 
 
@@ -289,9 +293,12 @@ $(function () {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl:false,
+      
     };
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 
   initMap();
+
+
 });

@@ -4,15 +4,14 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">  
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link
     href="https://fonts.googleapis.com/css?family=Fira+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
     rel="stylesheet">
-  <style>
-  </style>
+  
   <title>Карта Инвестиционных Проектов</title>
 </head>
 
@@ -23,17 +22,17 @@
 
     <div class="filter-div" >
 
-      <select class="form-control sectors filter">
+      <select class="form-control sectors filter bg-dark text-white">
         <option value="all" data-ru="Все сектора" data-tj="Ҳама бахшҳо" data-en="All sectors">All sectors</option>
       </select>
-      <select class="form-control prices filter">
+      <select class="form-control prices filter bg-dark text-white">
         <option value="all" data-ru="Сумма проекта в млн (долл. США)" data-tj="Арзиши умумӣ (млн. долл. ИМА)" data-en="Overall cost (mln. US$)">All prices</option>
         <option value="0" data-min="0" data-max="5">0-5</option>
         <option value="1" data-min="5" data-max="10">5-10</option>
         <option value="2" data-min="10" data-max="999">10-999</option>
       </select>
 
-      <select id="select" class="form-control language">
+      <select id="select" class="form-control language bg-dark text-white">
         <option value="ru" data-ru="Русский" data-tj="Русси" data-en="Russian">Русский</option>
         <option value="en" data-ru="Английский" data-tj="Англиси" data-en="English">English</option>
         <option value="tj" data-ru="Таджикский" data-tj="Тоҷики" data-en="Tajik">Тоҷики</option>
@@ -42,24 +41,24 @@
 
     <div class="projects"></div>
 
-    <div class="pagi-nation">
+    <div class="pagi-nation bg-white">
       <nav id="pagiNator" aria-label="Page navigation example">
         <ul class="pagination">
-
-
+          
+         
         </ul>
       </nav>
     </div>
-
+    
   </div>
-
+  
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
-
+    
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
     crossorigin="anonymous"></script>
