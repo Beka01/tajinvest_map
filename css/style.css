@@ -42,6 +42,10 @@ select.form-control {
    margin-right:0;
 }
 
+.badge-buttonss{
+   float: right;
+}
+
 .card-body > h6 {
    display: contents;
 }
@@ -141,7 +145,9 @@ p.card-text.descr{
       font-size: 14px;
    }
    
-   
+   .badge-buttonss{
+      float: right;
+    }
    #googleMap {
       height: 400px;
    }
@@ -233,5 +239,6 @@ p.card-text.descr{
       font-size: 11px;
       font-weight: 300;
    }
+   
 }
    
