@@ -69,9 +69,12 @@ $(function () {
             <h5 class="card-title title">${project.title[currentLang]}</h5>
             <p class="card-text descr">${project.descr[currentLang]}</p>
             <h6><span class="badge badge-primary project-sector">${sectors[project.sector][currentLang]}</span></h6>
-            <h6><span data-ru="${project.cost} млн" data-tj="${project.cost} млн" data-en="${project.cost} mln"
+            <h6><span data-ru="${project.cost} млн $" data-tj="${project.cost} млн $" data-en="${project.cost} mln $"
             class="badge badge badge-secondary">${project.cost} млн $</span> </h6>
             <h6><span data-ru="${project.realization} г." data-tj="${project.realization}сол" data-en="${project.realization} years" class="badge badge badge-success">${project.realization} г.</span> </h6>
+            <div class="badge-buttonss">
+              <button onclick="window.open(href='${project.doc[currentLang]}')" target="_blank"  type="button" class="btn btn-danger btn-sm"><i class="fas fa-download"></i></button>
+            </div>
           </div>
         </div>`;
       $(".projects").append(projectCard); // добавим карту на страницу
@@ -90,7 +93,6 @@ $(function () {
       $(".pagination li").removeClass("active");
       $(this).addClass("active");
       $(".filtered").hide();
-
       let grandTotal = limitPerPage * currentPage;
       for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
         $(".filtered:eq("+ s +")").show();
@@ -106,10 +108,13 @@ $(function () {
         currentPage++;
         $(".pagination li").removeClass("active");
         $(".filtered").hide();
+        
         let grandTotal = limitPerPage * currentPage;
         for(let s = grandTotal - limitPerPage; s < grandTotal; s++){
           $(".filtered:eq("+ s +")").show();
+          
       }
+      
       $(".pagination li.page-item:eq(" + (currentPage-1) + ")").addClass("active");
     }
   });
@@ -140,7 +145,16 @@ $(function () {
       $(".pagination").append("<li  class='page-item'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
     }
     $(".pagination").append("<li id='next-page' class='page-next'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+    if(totalOfPages === 0 || totalOfPages === 1){
+      $("#next-page").hide();
+      $("#previous-page").hide();
+    }else{
+      $("#next-page").show();
+      $("#previous-page").show();
+    }
   }
+
+  
 
   /* первоначальная установка ввыпадающего списка секторов */
   function setSectors(){
